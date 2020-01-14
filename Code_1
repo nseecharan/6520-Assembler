@@ -1,0 +1,105 @@
+;This code was created by Nigel Seecharan on 1/13/20
+
+;All annotations present in the code are left on purpose
+;to show my learning progress. Therefore I would not recommend
+;treating any of the code I write as an example of good practices,
+;since I am also learning at the time of this message.
+
+  lda #$00	; set a pointer at $40 to point to $0200
+	sta $40		
+	lda #$02
+	sta $41
+	ldy #$00	; set index to 0
+
+;****loops****
+
+green:
+	lda #$05
+	sta ($40),y
+	iny
+	cpy #$20	;what value to stop increment
+bne green
+
+	ldy #$e0	;set increment to start of last line of page
+	sta $41		;MEMO:cant remember how I knew to use this here
+
+blue:	
+	lda #$06
+	sta ($40),y
+	iny
+bne blue
+
+	lda #$02	; reset to the first bitmap page
+	sta $41
+	ldy #$00	; set index to 0
+
+yellow:
+innerloop1:
+	lda #$07	
+	sta ($40),y
+	jsr increment32
+bne innerloop1
+	inc $41		; increment the page
+	ldx $41		; get the page
+	cpx #$06	; compare with 6
+bne yellow	; continue until done all pages
+
+lda #$02
+sta $41
+ldy #$1f	; set index to right most pixel
+
+purple:
+innerloop2:
+	lda #$04
+	sta ($40),y
+	jsr increment32	
+	cpy #$1f
+bne innerloop2
+	inc $41		; increment the page
+	ldx $41		; get the page
+	cpx #$06	; compare with 6
+bne purple	; continue until done all pages
+
+
+;****sub-routine****
+
+increment32:	;MEMO:look into a better way to increment by "x" value
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny
+	iny	
+rts
+
+
+
