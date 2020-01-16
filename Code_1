@@ -53,7 +53,7 @@ innerloop2:
 	lda #$04
 	sta ($40),y
 	jsr increment32	
-	cpy #$1f
+	cpy #$1f	;MEMO:6502 Stack emptied! Wrapping...
 bne innerloop2
 	inc $41		; increment the page
 	ldx $41		; get the page
