@@ -63,7 +63,7 @@ bne purple	; continue until done all pages
 
 ;****sub-routine****
 
-increment32:	;MEMO:look into a better way to increment by "x" value MEMO:6502 Stack emptied! Wrapping...
+increment32:	;MEMO:6502 Stack emptied! Wrapping...
 	iny	;to fix the stack error all I would need to do is use the 32 iny entries in the actual loops
 	iny	;for yellow and purple. I will keep the code like this so that I can attempt to fix this subroutine.
 	iny
