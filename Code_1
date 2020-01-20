@@ -60,12 +60,12 @@ bne innerloop2
 	cpx #$06	; compare with 6
 bne purple	; continue until done all pages
 
-
+brk	;adding break solves the overflow problem-- use this to seperate main code from subroutines
 ;****sub-routine****
 
-increment32:	;MEMO:6502 Stack emptied! Wrapping...
-	iny	;to fix the stack error all I would need to do is use the 32 iny entries in the actual loops
-	iny	;for yellow and purple. I will keep the code like this so that I can attempt to fix this subroutine.
+increment32:	
+	iny	
+	iny	
 	iny
 	iny
 	iny
